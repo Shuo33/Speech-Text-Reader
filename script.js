@@ -66,12 +66,33 @@ function createBox(item) {
     const { image, text } = item;
     
     box.classList.add('box');
+
     box.innerHTML = `
     <img src="${image} " alt="${text}" />
     <p class="info">${text}</p>
     `;
 
     main.appendChild(box);
+
+    box.addEventListener('click', () => {
+        speakText(text);
+
+        // Add active effect
+        box.classList.add('active');
+        setTimeout(() => {
+            box.classList.remove('active');
+        }, 1000);
+    });
+}
+
+
+// Init speech synth: the 'SpeechSynthesisUtterance' represent a speech request, it contains the content the speech service should read and information about how to read it 
+const msg = new SpeechSynthesisUtterance();
+
+// Speak text
+function speakText(text) {
+    msg.text = text; 
+    speechSynthesis.speak(msg);
 }
 
 
@@ -107,6 +128,8 @@ function getVoices() {
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
 getVoices();
+
+
 
 
 
