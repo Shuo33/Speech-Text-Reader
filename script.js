@@ -95,6 +95,24 @@ function speakText(text) {
     speechSynthesis.speak(msg);
 }
 
+// Set voice
+function setVoice(e) {
+    msg.voice = voices.find(voice => 
+        voice.name === e.target.value
+    );
+}
+
+voicesSelect.addEventListener('change', setVoice);
+
+
+// Read text in the textarea
+function readText(e) {
+    speakText(textarea.value);
+    setVoice(e);
+}
+
+readBtn.addEventListener('click', readText);
+
 
 // Toggle text box 
 toggleBtn.addEventListener('click', () => {
@@ -113,7 +131,7 @@ let voices = [];
 function getVoices() {
     voices = speechSynthesis.getVoices();
 
-    // console.log(voices);
+    console.log(voices);
 
     voices.map(voice => {
         const option = document.createElement('option');
@@ -128,6 +146,8 @@ function getVoices() {
 speechSynthesis.addEventListener('voiceschanged', getVoices);
 
 getVoices();
+
+
 
 
 
