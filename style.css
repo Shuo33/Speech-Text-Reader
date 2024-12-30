@@ -56,7 +56,11 @@ select:focus {
     color: #fff;
     border-radius: 5px;
     padding: 20px;
-    /* transition: all 1s ease-in-out; */
+    transition: all 1s ease-in-out;
+}
+
+.text-box.show {
+    transform: translate(-50%, 0);
 }
 
 .text-box select {

@@ -4,6 +4,7 @@ const textarea = document.getElementById('text');
 const readBtn = document.getElementById('read');
 const toggleBtn = document.getElementById('toggle');
 const closeBtn = document.getElementById('close');
+const textBox = document.getElementById('text-box');
 
 const data = [
     {
@@ -72,3 +73,45 @@ function createBox(item) {
 
     main.appendChild(box);
 }
+
+
+// Toggle text box 
+toggleBtn.addEventListener('click', () => {
+    textBox.classList.toggle('show');
+}); 
+
+// Close the text box
+closeBtn.addEventListener('click', () => {
+    textBox.classList.remove('show');
+}); 
+
+
+// Store voices
+let voices = [];
+
+function getVoices() {
+    voices = speechSynthesis.getVoices();
+
+    // console.log(voices);
+
+    voices.map(voice => {
+        const option = document.createElement('option');
+
+        option.value = voice.name;
+        option.innerText = `${voice.name} ${voice.lang}`;
+
+        voicesSelect.appendChild(option);
+    })
+}
+
+speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+getVoices();
+
+
+
+
+
+
+
+
